@@ -1,0 +1,97 @@
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+}
+
+.container {
+    background: pink;
+    padding: 20px 40px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 600px;
+
+}
+
+header h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: green;
+}
+
+header p {
+    font-size: 1rem;
+    color: purple;
+}
+
+.choices {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+}
+
+.choice-button {
+    border: none;
+    background: red;
+    color: aqua;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-align: center;
+}
+
+.choice-button img {
+    width: 40px;
+    margin-bottom: 5px;
+}
+
+.choice-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.results {
+    font-size: 1.2rem;
+    margin: 20px 0;
+    color: yellow;
+    background: blue;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.stats {
+    display: flex;
+    justify-content: space-around;
+    font-size: 1rem;
+    margin-top: 20px;
+    background : black;
+    padding: 10px;
+    border-radius: 10px;
+    color:aqua;
+}
+
+.reset-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    background: purple;
+    color: gold;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.reset-button:hover {
+    background: #338a3e;
+}

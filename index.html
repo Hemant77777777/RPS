@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock, Paper, Scissors Game</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const btnRock = document.querySelector('#ROCK');
+            const btnPaper = document.querySelector('#PAPER');
+            const btnScissors = document.querySelector('#SCISSORS');
+            const resultDisplay = document.querySelector('#game-result');
+            const winsDisplay = document.querySelector('#wins');
+            const lossesDisplay = document.querySelector('#losses');
+            const drawsDisplay = document.querySelector('#draws');
+            const resetButton = document.querySelector('#reset-button');
+            const modal = document.querySelector("#modal");
+            const modalText = document.querySelector("#modal-text");
+            const closeModal = document.querySelector("#close-modal");
+
+            let wins = 0;
+            let losses = 0;
+            let draws = 0;
+
+            btnRock.addEventListener('click', () => playGame("ROCK"));
+            btnPaper.addEventListener('click', () => playGame("PAPER"));
+            btnScissors.addEventListener('click', () => playGame("SCISSORS"));
+            resetButton.addEventListener('click', resetGame);
+            closeModal.addEventListener("click", () => {
+                modal.style.display = "none";
+            });
+
+            function getComputerChoice() {
+                const choices = ["ROCK", "PAPER", "SCISSORS"];
+                return choices[Math.floor(Math.random() * 3)];
+            }
+
+            function playGame(playerChoice) {
+                const computerChoice = getComputerChoice();
+                let resultMessage = '';
+
+                if (playerChoice === computerChoice) {
+                    draws++;
+                    resultMessage = `It's a draw! Both chose ${playerChoice}.`;
+                    drawsDisplay.textContent = `Draws: ${draws}`;
+                } else if (
+                    (playerChoice === "ROCK" && computerChoice === "SCISSORS") ||
+                    (playerChoice === "PAPER" && computerChoice === "ROCK") ||
+                    (playerChoice === "SCISSORS" && computerChoice === "PAPER")
+                ) {
+                    wins++;
+                    resultMessage = `You win! ${playerChoice} beats ${computerChoice}.`;
+                    winsDisplay.textContent = `Wins: ${wins}`;
+                } else {
+                    losses++;
+                    resultMessage = `You lose! ${computerChoice} beats ${playerChoice}.`;
+                    lossesDisplay.textContent = `Losses: ${losses}`;
+                }
+
+                resultDisplay.textContent = resultMessage;
+
+                if (wins === 5 || losses === 5) {
+                    setTimeout(() => endGame(), 100);
+                }
+            }
+
+            function endGame() {
+                if (wins > losses) {
+                    modalText.textContent = "Congratulations! You win the game!";
+                } else {
+                    modalText.textContent = "So sad! Better luck next time.";
+                }
+                modal.style.display = "block";
+                resetGame();
+            }
+
+            function resetGame() {
+                wins = 0;
+                losses = 0;
+                draws = 0;
+                winsDisplay.textContent = 'Wins: 0';
+                lossesDisplay.textContent = 'Losses: 0';
+                drawsDisplay.textContent = 'Draws: 0';
+                resultDisplay.textContent = 'Choose your weapon to start the game!';
+            }
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Rock, Paper & Scissors</h1>
+            <p>Play and try your luck. First to reach 5 wins is victorious!</p>
+        </header>
+        
+        <main>
+            <div class="choices">
+                <button id="ROCK" class="choice-button">
+                    <img src="img/rock.jfif" alt="Rock">
+                    <span>Rock</span>
+                </button>
+                <button id="PAPER" class="choice-button">
+                    <img src="img/paper.jfif" alt="Paper">
+                    <span>Paper</span>
+                </button>
+                <button id="SCISSORS" class="choice-button">
+                    <img src="img/scissors.jfif" alt="Scissors">
+                    <span>Scissors</span>
+                </button>
+            </div>
+
+            <div class="results">
+                <p id="game-result">Choose your weapon to start the game!</p>
+            </div>
+
+            <div class="stats">
+                <span id="wins">Wins: 0</span>
+                <span id="losses">Losses: 0</span>
+                <span id="draws">Draws: 0</span>
+            </div>
+
+            <button id="reset-button" class="reset-button">Reset Game</button>
+        </main>
+    </div>
+
+    <div id="modal" class="modal" style="display:none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0, 0, 0, 0.9); padding: 20px; border-radius: 10px; text-align: center; color: aqua; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);">
+        <p id="modal-text"></p>
+        <button id="close-modal" style="margin-top: 20px; padding: 10px 20px; background: linear-gradient(135deg, #43cea2, #185a9d); border: none; border-radius: 10px; color: white; cursor: pointer;">Close</button>
+    </div>
+</body>
+</html>
